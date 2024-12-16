@@ -8,7 +8,7 @@ section .data
 
 section .bss
     input_buf resb 400000       ; Espai per llegir la entrada (més gran per permetre més números)
-    A        resd 100000        ; Espai per un màxim de 128 números (32 bytes per número)
+    A        resd 100000        ; Espai per un màxim de 100,000 números (32 bytes per número)
     num_count resd 1         ; Variable per emmagatzemar el nombre total de números llegits
     num_str  resb 12         ; Buffer per convertir un número a cadena
     sleep_req resq 1         ; Estructura `timespec` (1 segon de pausa)
