@@ -7,8 +7,8 @@ section .data
     error_len:  equ $ - error
 
 section .bss
-    input_buf resb 4000000      ; Buffer para leer la entrada (suficiente para 100,000 números)
-    A        resd 1000000       ; Espacio para almacenar hasta 100,000 números (32 bits por número)
+    input_buf resb 400000      ; Buffer para leer la entrada (suficiente para 100,000 números)
+    A        resd 100000       ; Espacio para almacenar hasta 100,000 números (32 bits por número)
     num_count resd 1         ; Variable para almacenar el número total de números leídos
     num_str  resb 12         ; Buffer para convertir un número a cadena
 
@@ -27,7 +27,7 @@ _start:
     mov eax, 3              ; Número de la llamada al sistema (read)
     mov ebx, 0              ; Descriptor de archivo (0 = entrada estándar)
     mov ecx, input_buf      ; Dirección del buffer de entrada
-    mov edx, 4000000          ; Leemos hasta 400,000 bytes (suficiente para 100,000 números)
+    mov edx, 400000          ; Leemos hasta 400,000 bytes (suficiente para 100,000 números)
     int 0x80                ; Llamada al sistema
     cmp eax, 0              ; Comprobar si la lectura fue exitosa
     jle error_exit          ; Si no, mostrar error
@@ -65,7 +65,7 @@ parse_digit:
 store_number:
     mov [A + edi*4], ebx        ; Guardar el número en A[edi]
     inc edi                     ; Incrementar el índice
-    cmp edi, 1000000              ; Verificar límite máximo de 100,000 números
+    cmp edi, 100000              ; Verificar límite máximo de 100,000 números
     je done_parsing
     jmp convert_loop
 
